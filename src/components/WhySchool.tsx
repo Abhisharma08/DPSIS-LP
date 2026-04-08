@@ -16,14 +16,14 @@ const benefits = [
 
 export default function WhySchool() {
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 bg-gradient-to-b from-[#0B1B3B] to-[#08132A] overflow-hidden font-[var(--font-poppins)]">
+    <section className="relative py-14 sm:py-16 lg:py-20 bg-gradient-to-b from-[#0B1B3B] to-[#08132A] overflow-hidden">
 
       {/* background glow */}
       <div className="absolute top-0 left-1/4 w-[250px] sm:w-[350px] md:w-[500px] h-[250px] sm:h-[350px] md:h-[500px] bg-blue-500/20 blur-[100px] md:blur-[160px] rounded-full -z-10"/>
       <div className="absolute bottom-0 right-1/4 w-[250px] sm:w-[350px] md:w-[500px] h-[250px] sm:h-[350px] md:h-[500px] bg-purple-500/20 blur-[100px] md:blur-[160px] rounded-full -z-10"/>
 
       {/* ✅ SAME CONTAINER AS HERO (ALIGN FIX) */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 lg:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 lg:gap-16 items-center">
 
         {/* IMAGE */}
         <motion.div
@@ -33,7 +33,7 @@ export default function WhySchool() {
           transition={{ duration: 0.6 }}
           className="relative w-full"
         >
-          <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.6)] border border-white/10">
+          <div className="rounded-xl overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.6)] border border-white/10">
 
             <Image
               src="https://cdn.lugc.link/90d7fd4e-1c9c-48e6-898f-ef737995c3ad/-/stretch/off/-/resize/x634/-/format/auto/"

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,9 @@ export default function EnquiryForm() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [hubspotContactId, setHubspotContactId] = useState("");
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -36,50 +40,109 @@ export default function EnquiryForm() {
     grade: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
+    setErrorMessage("");
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSelectChange = (id, value) => {
+  const handleSelectChange = (id: string, value: string) => {
+    setErrorMessage("");
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSend = async (e) => {
-    e.preventDefault();
-    if (step === 1) {
-      setStep(2);
-      return;
+  const parseResponse = async (res: Response): Promise<Record<string, any>> => {
+    const text = await res.text();
+
+    if (!text) {
+      return {};
     }
 
     try {
-      console.log("Form Data:", formData);
-      const res = await fetch("/api/hubspot", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          campus: formData.campus,
-          grade: formData.grade,
-        }),
-      });
-      const data = await res.json();
-      console.log("HubSpot Response:", data);
+      return JSON.parse(text);
+    } catch {
+      return { error: text };
+    }
+  };
+
+  const saveLeadStep = async (leadStep: number) => {
+    const normalizedPhone = formData.phone.replace(/\D/g, "");
+
+    const res = await fetch("/api/hubspot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contactId: hubspotContactId || undefined,
+        step: leadStep,
+        name: formData.fullName,
+        childName: formData.childName,
+        email: formData.email,
+        phone: normalizedPhone,
+        campus: formData.campus,
+        grade: formData.grade,
+      }),
+    });
+
+    const data = await parseResponse(res);
+
+    if (!res.ok) {
+      return {
+        ok: false,
+        error: data.error || "Unable to save your enquiry.",
+      };
+    }
+
+    if (data.contactId) {
+      setHubspotContactId(data.contactId);
+    }
+
+    return { ok: true, data };
+  };
+
+  const handleSend = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      if (step === 1) {
+        const result = await saveLeadStep(1);
+
+        if (!result.ok) {
+          setErrorMessage(result.error);
+          return;
+        }
+
+        setStep(2);
+        return;
+      }
+
+      const result = await saveLeadStep(2);
+
+      if (!result.ok) {
+        setErrorMessage(result.error);
+        return;
+      }
+
       router.push("/thank-you");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to save your enquiry. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <Card className="w-full max-w-[380px] bg-transparent text-foreground shadow-none border-none overflow-hidden rounded-[1.5rem] mx-auto backdrop-blur-md">
+    <Card className="w-full bg-transparent text-foreground shadow-none border-none overflow-hidden rounded-2xl mx-auto backdrop-blur-md">
       {/* Top Accent Line - DPS Blue/Yellow theme */}
       <div className="h-1.5 bg-gradient-to-r from-[#1e3a8a] to-[#facc15] w-full" />
 
-      <CardHeader className="space-y-1.5 p-8 pb-3">
-        <CardTitle className="text-2xl font-bold text-[#1e3a8a] tracking-tight">
+      <CardHeader className="space-y-1 p-6 sm:p-7 lg:p-6 pb-3">
+        <CardTitle className="text-xl sm:text-2xl lg:text-xl font-bold text-[#1e3a8a] tracking-tight">
           Enquire Now
         </CardTitle>
         <CardDescription className="text-slate-400 text-[11px] font-medium uppercase tracking-wider">
@@ -87,7 +150,7 @@ export default function EnquiryForm() {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="p-8 pt-4">
+      <CardContent className="p-6 sm:p-7 lg:p-6 pt-3">
         {submitted ? (
           <div className="flex flex-col items-center justify-center text-center space-y-4 py-8">
             <h2 className="text-xl font-bold text-[#1e3a8a]">🎉 Thank You!</h2>
@@ -105,11 +168,11 @@ export default function EnquiryForm() {
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleSend} className="space-y-4">
+          <form onSubmit={handleSend} className="space-y-3.5">
             {/* STEP 1 */}
             {step === 1 && (
-              <div className="grid grid-cols-1 gap-4">
-                <div className="space-y-1.5">
+              <div className="grid grid-cols-1 gap-3.5">
+                <div className="space-y-1">
                   <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
                     Parent Name
                   </Label>
@@ -119,11 +182,11 @@ export default function EnquiryForm() {
                     required
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="h-11 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
                   />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
                     Child Name
                   </Label>
@@ -133,11 +196,30 @@ export default function EnquiryForm() {
                     required
                     value={formData.childName}
                     onChange={handleInputChange}
-                    className="h-11 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
                   />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1">
+                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
+                    Phone Number
+                  </Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="10 digit phone number"
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    title="Enter a 10 digit phone number"
+                    required
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                  />
+                </div>
+
+                <div className="space-y-1">
                   <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
                     Email Address
                   </Label>
@@ -148,7 +230,7 @@ export default function EnquiryForm() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="h-11 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
                   />
                 </div>
               </div>
@@ -156,64 +238,59 @@ export default function EnquiryForm() {
 
             {/* STEP 2 */}
             {step === 2 && (
-              <div className="grid grid-cols-1 gap-4">
-                <div className="space-y-1.5">
-                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
-                    Phone Number
-                  </Label>
-                  <Input
-                    id="phone"
-                    placeholder="+91 9876543210"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="h-11 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
+              <div className="grid grid-cols-1 gap-3.5">
+                <div className="space-y-1">
                    <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">Campus</Label>
-                  <Select onValueChange={(v) => handleSelectChange("campus", v)}>
-                    <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200 rounded-lg text-sm">
+                  <Select required value={formData.campus} onValueChange={(v) => handleSelectChange("campus", v)}>
+                    <SelectTrigger className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 rounded-lg text-sm">
                       <SelectValue placeholder="Select Campus" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="main">Kovan Campus</SelectItem>
-                      <SelectItem value="branch">Branch Campus</SelectItem>
+                      <SelectItem value="Kovan Campus">Kovan Campus</SelectItem>
+                      <SelectItem value="Alexandra Campus">Alexandra Campus</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">Grade</Label>
-                  <Select onValueChange={(v) => handleSelectChange("grade", v)}>
-                    <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200 rounded-lg text-sm">
-                      <SelectValue placeholder="Select Grade" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="nursery">Nursery</SelectItem>
-                      <SelectItem value="kg">Kindergarten 1</SelectItem>
-                      <SelectItem value="kg1">Kindergarten 2</SelectItem>
-                      <SelectItem value="2">Grade 1</SelectItem>
-                      <SelectItem value="3">Grade 2</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input
+                    id="grade"
+                    placeholder="Enter grade"
+                    required
+                    value={formData.grade}
+                    onChange={handleInputChange}
+                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                  />
                 </div>
               </div>
             )}
 
-            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="pt-4">
+            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="pt-2">
               <Button
                 type="submit"
-                className="w-full bg-[#facc15] hover:bg-[#eab308] text-[#1e3a8a] font-black h-12 text-base rounded-lg shadow-sm transition-all"
+                disabled={isSubmitting}
+                className="w-full bg-[#facc15] hover:bg-[#eab308] text-[#1e3a8a] font-black h-11 sm:h-12 lg:h-10 text-sm sm:text-base lg:text-sm rounded-lg shadow-sm transition-all"
               >
-                {step === 1 ? "Next Step" : "Submit Enquiry"}
+                {isSubmitting
+                  ? "Saving..."
+                  : step === 1
+                    ? "Next Step"
+                    : "Submit Enquiry"}
               </Button>
             </motion.div>
+
+            {errorMessage && (
+              <p className="text-xs font-medium text-red-600 text-center">
+                {errorMessage}
+              </p>
+            )}
 
             {step === 2 && (
               <Button
                 type="button"
                 variant="ghost"
+                disabled={isSubmitting}
                 onClick={() => setStep(1)}
                 className="w-full h-8 text-xs text-slate-400 hover:bg-transparent hover:text-slate-600 font-bold"
               >

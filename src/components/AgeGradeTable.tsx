@@ -2,15 +2,15 @@
 
 export function AgeGradeTable() {
   return (
-    <div className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden w-full max-w-[300px] mx-auto">
+    <div className="bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden w-full max-w-sm">
 
       {/* Header */}
-      <div className="bg-[#F2B705] text-black font-bold text-sm px-4 py-3 text-center border-b border-gray-300">
+      <div className="bg-[#F2B705] text-black font-bold text-sm px-4 py-2.5 text-center border-b border-gray-300">
         Age vs Grade Eligibility
       </div>
 
       {/* Table */}
-      <table className="w-full text-sm">
+      <table className="w-full text-xs sm:text-sm">
         <thead>
           <tr className="bg-[#F2B705] text-black font-semibold">
             <th className="py-2 px-3 border border-gray-300 text-left">

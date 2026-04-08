@@ -52,7 +52,7 @@ const item = {
 
 export default function FeatureCards() {
   return (
-    <section className="relative py-12 md:py-24 overflow-hidden bg-white">
+    <section className="relative py-14 sm:py-16 lg:py-20 overflow-hidden bg-white">
       {/* Subtle Background Elements */}
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -z-10" />
       <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-50 rounded-full blur-3xl opacity-50 -z-10" />
@@ -67,12 +67,12 @@ export default function FeatureCards() {
         >
           {features.map((f, i) => (
             <motion.div key={i} variants={item} className="h-full">
-              <Card className={`h-full group hover:shadow-xl transition-all duration-300 border-2 ${f.borderColor} rounded-2xl md:rounded-[2.5rem] bg-white overflow-hidden flex flex-col items-center text-center p-6 md:p-8`}>
+              <Card className={`h-full group hover:shadow-xl transition-all duration-300 border-2 ${f.borderColor} rounded-xl bg-white overflow-hidden flex flex-col items-center text-center p-6 md:p-8`}>
                 
                 {/* Icon Section - Centered like reference */}
                 <div className="mb-6">
                   <div
-                    className={`w-16 h-16 md:w-20 md:h-20 ${f.color} rounded-2xl flex items-center justify-center transition-`}
+                    className={`w-16 h-16 md:w-20 md:h-20 ${f.color} rounded-xl flex items-center justify-center transition-`}
                   >
                     <f.icon className="w-8 h-8 md:w-10 md:h-10" />
                   </div>

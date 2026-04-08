@@ -31,7 +31,7 @@ SOCIAL RESPONSIBILITY – Building a Better Future Today.`,
 export default function MissionVision() {
   return (
     <section
-      className="relative overflow-hidden bg-cover bg-center py-16 sm:py-24 md:py-32"
+      className="relative overflow-hidden bg-cover bg-center py-14 sm:py-16 lg:py-20"
       style={{
         backgroundImage:
           "url('https://images.assets-landingi.com/uc/7d5cda0d-e32d-43b5-9112-79a17395c559/SEN001623.JPG')",
@@ -51,10 +51,10 @@ export default function MissionVision() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="flex h-full"
             >
-              <div className="w-full p-6 sm:p-8 md:p-10 rounded-[2rem] bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:bg-white/[0.08] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col items-center text-center">
+              <div className="w-full p-6 sm:p-8 md:p-10 rounded-xl bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:bg-white/[0.08] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col items-center text-center">
                 
                 {/* SCHOOL THEMED ICONS */}
-                <div className={`w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${card.color} shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                <div className={`w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br ${card.color} shadow-lg group-hover:scale-110 transition-transform duration-500`}>
                   <card.icon className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
                 </div>
 
