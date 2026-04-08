@@ -2,7 +2,6 @@
 
 import { BookOpenCheck, UserRoundCheck, Building2 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
 
 const features = [
   {
@@ -33,23 +32,6 @@ const features = [
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
-
 export default function FeatureCards() {
   return (
     <section className="relative py-14 sm:py-16 lg:py-20 overflow-hidden bg-white">
@@ -58,15 +40,9 @@ export default function FeatureCards() {
       <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-50 rounded-full blur-3xl opacity-50 -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {features.map((f, i) => (
-            <motion.div key={i} variants={item} className="h-full">
+            <div key={i} className="h-full">
               <Card className={`h-full group hover:shadow-xl transition-all duration-300 border-2 ${f.borderColor} rounded-xl bg-white overflow-hidden flex flex-col items-center text-center p-6 md:p-8`}>
                 
                 {/* Icon Section - Centered like reference */}
@@ -91,9 +67,9 @@ export default function FeatureCards() {
                 </CardContent>
 
               </Card>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

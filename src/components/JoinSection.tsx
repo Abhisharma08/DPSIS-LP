@@ -1,17 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export default function JoinSection() {
   return (
     <section className="relative py-16 sm:py-20 lg:py-24 text-white text-center overflow-hidden">
       {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://cdn.lugc.link/90d7fd4e-1c9c-48e6-898f-ef737995c3ad/-/format/auto/')",
-        }}
+      <Image
+        src="https://cdn.lugc.link/90d7fd4e-1c9c-48e6-898f-ef737995c3ad/-/format/auto/"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center"
       />
       {/* Overlay - Slightly lighter to let the image show through like the reference */}
       <div className="absolute inset-0 bg-black/60 md:bg-black/55" />
@@ -24,6 +25,8 @@ export default function JoinSection() {
               src="https://cdn-icons-png.flaticon.com/512/167/167707.png" 
               className="w-14 h-14 md:w-16 md:h-16" 
               alt="School Icon" 
+              loading="lazy"
+              decoding="async"
             />
         </div>
 

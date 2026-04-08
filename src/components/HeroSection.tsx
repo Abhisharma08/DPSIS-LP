@@ -1,18 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 import EnquiryForm from "./EnquiryForm";
 import { AgeGradeTable } from "./AgeGradeTable";
 
 export default function HeroSection() {
   return (
     <section 
-      className="relative min-h-[calc(100svh-73px)] flex items-center py-10 sm:py-12 lg:py-16 overflow-hidden bg-background bg-cover bg-center font-sans"
-      style={{
-        backgroundImage:
-          "url('https://cdn.lugc.link/7309a6b8-b380-422e-96c6-99656dcab271/-/stretch/off/-/resize/x1024/-/format/auto/')",
-      }}
+      className="relative min-h-[calc(100svh-73px)] flex items-center py-10 sm:py-12 lg:py-16 overflow-hidden bg-background font-sans"
     >
+      <Image
+        src="https://cdn.lugc.link/7309a6b8-b380-422e-96c6-99656dcab271/-/stretch/off/-/resize/x1024/-/format/auto/"
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/75 z-0 lg:bg-gradient-to-r lg:from-black/90 lg:via-black/65 lg:to-black/15" />
 
@@ -22,10 +28,7 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT CONTENT - Removed items-center to keep it left-aligned */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+          <div 
             className="lg:col-span-7 flex flex-col space-y-5 text-left"
           >
 
@@ -62,19 +65,16 @@ export default function HeroSection() {
               <AgeGradeTable />
             </div>
 
-          </motion.div>
+          </div>
 
           {/* RIGHT CONTENT */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <div 
             className="lg:col-span-5 flex justify-center lg:justify-end w-full"
           >
             <div className="w-full max-w-md lg:max-w-[360px] bg-white rounded-2xl shadow-2xl overflow-hidden">
               <EnquiryForm />
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>

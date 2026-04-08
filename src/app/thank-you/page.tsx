@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,10 +10,7 @@ export default function ThankYouPage() {
       <Header />
 
       <section className="min-h-[calc(100svh-73px)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center max-w-2xl"
         >
           <div className="flex justify-center mb-6">
@@ -53,7 +49,7 @@ export default function ThankYouPage() {
               Back to Home
             </button>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       <Footer />

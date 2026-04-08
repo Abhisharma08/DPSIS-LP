@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
 
 const benefits = [
   "DPS seal of Quality and Excellence",
@@ -26,11 +25,7 @@ export default function WhySchool() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 lg:gap-16 items-center">
 
         {/* IMAGE */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="relative w-full"
         >
           <div className="rounded-xl overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.6)] border border-white/10">
@@ -44,7 +39,7 @@ export default function WhySchool() {
             />
 
           </div>
-        </motion.div>
+        </div>
 
         {/* CONTENT */}
         <div className="w-full">

@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { GraduationCap, Rainbow, Telescope } from "lucide-react";
-import { motion } from "framer-motion";
 
 const cards = [
   {
@@ -30,25 +30,23 @@ SOCIAL RESPONSIBILITY – Building a Better Future Today.`,
 
 export default function MissionVision() {
   return (
-    <section
-      className="relative overflow-hidden bg-cover bg-center py-14 sm:py-16 lg:py-20"
-      style={{
-        backgroundImage:
-          "url('https://images.assets-landingi.com/uc/7d5cda0d-e32d-43b5-9112-79a17395c559/SEN001623.JPG')",
-      }}
-    >
+    <section className="relative overflow-hidden py-14 sm:py-16 lg:py-20">
+      <Image
+        src="https://images.assets-landingi.com/uc/7d5cda0d-e32d-43b5-9112-79a17395c559/SEN001623.JPG"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+
       {/* Dark Navy Overlay - Better Contrast */}
       <div className="absolute inset-0 bg-[#0E2A47]/90 backdrop-blur-[2px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {cards.map((card, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
               className="flex h-full"
             >
               <div className="w-full p-6 sm:p-8 md:p-10 rounded-xl bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:bg-white/[0.08] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col items-center text-center">
@@ -68,7 +66,7 @@ export default function MissionVision() {
                   {card.text}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

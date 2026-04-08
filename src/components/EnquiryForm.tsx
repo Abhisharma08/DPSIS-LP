@@ -20,7 +20,6 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { motion } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
 
 export default function EnquiryForm() {
@@ -266,7 +265,7 @@ export default function EnquiryForm() {
               </div>
             )}
 
-            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="pt-2">
+            <div className="pt-2 transition-transform active:scale-[0.99] hover:scale-[1.01]">
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -278,7 +277,7 @@ export default function EnquiryForm() {
                     ? "Next Step"
                     : "Submit Enquiry"}
               </Button>
-            </motion.div>
+            </div>
 
             {errorMessage && (
               <p className="text-xs font-medium text-red-600 text-center">
