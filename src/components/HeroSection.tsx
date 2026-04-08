@@ -29,7 +29,7 @@ export default function HeroSection() {
           
           {/* LEFT CONTENT - Removed items-center to keep it left-aligned */}
           <div 
-            className="lg:col-span-7 flex flex-col space-y-5 text-left"
+            className="lg:col-span-7 flex flex-col items-center lg:items-start space-y-5 text-center lg:text-left"
           >
 
             {/* BADGE */}
@@ -53,15 +53,15 @@ export default function HeroSection() {
             </p>
 
             {/* DESCRIPTION */}
-            <div className="flex items-stretch space-x-4">
-              <div className="w-1.5 bg-yellow-400 rounded-full"></div>
+            <div className="flex items-stretch justify-center lg:justify-start space-x-4">
+              <div className="hidden sm:block w-1.5 bg-yellow-400 rounded-full"></div>
               <p className="text-gray-300 text-sm sm:text-base max-w-md leading-relaxed">
                 Enroll your child in DPS International School and provide them with the foundation they need to excel in an ever-changing world.
               </p>
             </div>
 
             {/* TABLE - Left aligned */}
-            <div className="w-full sm:max-w-md pt-2">
+            <div className="w-full sm:max-w-md pt-2 flex justify-center lg:justify-start">
               <AgeGradeTable />
             </div>
 
