@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
-    /* Background */
-    --background: 210 20% 97%;
+    /* Background: #F8FAFC */
+    --background: 210 40% 98%;
+    /* Text: #0F172A */
     --foreground: 222 47% 11%;
 
     /* Cards */
@@ -15,63 +16,63 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* DPS NAVY */
-    --primary: 213 67% 17%; 
+    /* Primary Navy: #0A2540 */
+    --primary: 210 73% 15%; 
     --primary-foreground: 210 40% 98%;
 
-    /* Light section */
-    --secondary: 210 25% 95%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary: #2563EB (Primary Blue) */
+    --secondary: 221 83% 53%;
+    --secondary-foreground: 210 40% 98%;
 
     /* Muted */
-    --muted: 210 25% 95%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    /* DPS GOLD */
-    --accent: 45 90% 50%;
-    --accent-foreground: 213 67% 17%;
+    /* Accent Gold: #F59E0B */
+    --accent: 38 92% 50%;
+    --accent-foreground: 210 73% 15%;
 
     /* Error */
-    --destructive: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     /* Borders */
-    --border: 214 30% 90%;
-    --input: 214 30% 90%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
 
-    --ring: 45 90% 50%;
+    --ring: 221 83% 53%;
 
-    --radius: 1.25rem;
+    --radius: 1.5rem;
   }
 
   .dark {
-    --background: 213 67% 10%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 213 67% 12%;
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 213 67% 12%;
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
-    --primary-foreground: 213 67% 17%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 213 40% 20%;
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 213 40% 20%;
-    --muted-foreground: 215 20% 70%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 45 90% 50%;
-    --accent-foreground: 213 67% 17%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 62% 35%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 213 40% 20%;
-    --input: 213 40% 20%;
-    --ring: 45 90% 50%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
   }
 }
 
@@ -81,34 +82,46 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body selection:bg-accent selection:text-white;
+    @apply bg-background text-foreground font-body selection:bg-accent/30 selection:text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.625;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline tracking-tight;
+    @apply font-headline tracking-tight text-[#0A2540];
   }
 }
 
 @layer components {
-
-  /* Glass effect */
+  /* Premium Glassmorphism */
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-2xl;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px -15px rgba(10, 37, 64, 0.1);
   }
 
-  /* DPS Hero Gradient */
-  .premium-gradient {
-    @apply bg-gradient-to-br from-[#0E2A47] via-[#132f4c] to-[#1B3F6B];
+  .glass-card-dark {
+    background: rgba(10, 37, 64, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.3);
   }
 
-  /* Light decorative gradient */
-  .soft-gradient {
-    @apply bg-gradient-to-tr from-[#F2B705]/10 via-transparent to-[#0E2A47]/5;
+  /* Premium Gradient Backgrounds */
+  .premium-navy-gradient {
+    background: radial-gradient(circle at 10% 20%, #102a43 0%, #0a2540 90%);
   }
 
-  /* Section spacing */
-  .section-padding {
-    @apply py-24 lg:py-32;
+  /* Standard spacing constraints */
+  .section-container {
+    @apply w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  /* Uniform padding spacing */
+  .section-padding-y {
+    @apply py-[60px] md:py-[100px];
   }
 }

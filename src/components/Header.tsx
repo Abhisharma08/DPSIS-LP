@@ -1,33 +1,47 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 shadow-sm border-b border-gray-200 backdrop-blur">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-lg border-b border-slate-200/60 shadow-sm">
+      <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 py-3.5 flex items-center justify-between gap-4">
 
         {/* Logo */}
-        <div className="flex min-w-0 items-center gap-3">
+        <motion.div 
+          initial={{ opacity: 0, x: -15 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          className="flex min-w-0 items-center gap-3"
+        >
           <Image
             src="https://cdn.lugc.link/ba71d94d-c3cf-44c7-9764-294540f5cc26/-/preview/108x76/-/format/auto/"
             alt="DPS International School"
-            width={100}
-            height={70}
+            width={108}
+            height={76}
             priority
-            className="h-12 w-auto object-contain sm:h-14"
+            className="h-11 w-auto object-contain sm:h-14 transition-transform duration-300 hover:scale-[1.02]"
           />
-        </div>
+        </motion.div>
 
         {/* Button */}
-        <div className="shrink-0">
-          <button className="bg-[#1e3a8a] text-white font-semibold px-4 py-2 text-xs sm:px-6 sm:py-2.5 sm:text-sm rounded-lg shadow-md hover:bg-[#172f70] transition">
+        <motion.div 
+          initial={{ opacity: 0, x: 15 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          className="shrink-0"
+        >
+          <motion.button 
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-[#F59E0B] text-[#0A2540] font-bold px-4 py-2 text-xs sm:px-6 sm:py-2.5 sm:text-sm rounded-xl shadow-md shadow-amber-500/10 hover:bg-[#e08e0a] hover:shadow-lg transition-all duration-200"
+          >
             Admission Open 2026-27
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
       </div>
-
     </header>
   );
 }

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import EligibilitySection from "@/components/EligibilitySection";
 import FeatureCards from "@/components/FeatureCards";
 import WhySchool from "@/components/WhySchool";
 import JoinSection from "@/components/JoinSection";
@@ -11,6 +12,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <HeroSection />
+      {/* <EligibilitySection /> */}
       <FeatureCards />
       <JoinSection />
       <WhySchool />

@@ -136,24 +136,24 @@ export default function EnquiryForm() {
   };
 
   return (
-    <Card className="w-full bg-transparent text-foreground shadow-none border-none overflow-hidden rounded-2xl mx-auto backdrop-blur-md">
-      {/* Top Accent Line - DPS Blue/Yellow theme */}
-      <div className="h-1.5 bg-gradient-to-r from-[#1e3a8a] to-[#facc15] w-full" />
+    <Card className="w-full bg-white text-slate-900 border border-slate-200/80 shadow-2xl rounded-[24px] overflow-hidden mx-auto">
+      {/* Top Accent Line - DPS Navy/Blue/Gold theme */}
+      <div className="h-2 bg-gradient-to-r from-[#0A2540] via-[#2563EB] to-[#F59E0B] w-full" />
 
-      <CardHeader className="space-y-1 p-6 sm:p-7 lg:p-6 pb-3">
-        <CardTitle className="text-xl sm:text-2xl lg:text-xl font-bold text-[#1e3a8a] tracking-tight">
+      <CardHeader className="space-y-1 p-6 sm:p-8 lg:p-6 pb-2">
+        <CardTitle className="text-xl sm:text-2xl lg:text-xl font-black text-[#0A2540] tracking-tight">
           Enquire Now
         </CardTitle>
-        <CardDescription className="text-slate-400 text-[11px] font-medium uppercase tracking-wider">
+        <CardDescription className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">
           Please fill in the details below.
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="p-6 sm:p-7 lg:p-6 pt-3">
+      <CardContent className="p-6 sm:p-8 lg:p-6 pt-2">
         {submitted ? (
           <div className="flex flex-col items-center justify-center text-center space-y-4 py-8">
-            <h2 className="text-xl font-bold text-[#1e3a8a]">🎉 Thank You!</h2>
-            <p className="text-slate-500 text-sm">
+            <h2 className="text-xl font-bold text-[#0A2540]">🎉 Thank You!</h2>
+            <p className="text-slate-500 text-sm leading-relaxed">
               Your enquiry has been submitted successfully.
             </p>
             <Button
@@ -161,18 +161,18 @@ export default function EnquiryForm() {
                 setSubmitted(false);
                 setStep(1);
               }}
-              className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-lg px-8"
+              className="bg-[#0A2540] hover:bg-[#102a43] text-white rounded-xl px-8 h-11 transition-all"
             >
               Submit Another
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleSend} className="space-y-3.5">
+          <form onSubmit={handleSend} className="space-y-4">
             {/* STEP 1 */}
             {step === 1 && (
-              <div className="grid grid-cols-1 gap-3.5">
+              <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-1">
-                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
+                  <Label className="text-[10px] uppercase tracking-wider font-bold text-slate-500 ml-1 block">
                     Parent Name
                   </Label>
                   <Input
@@ -181,12 +181,12 @@ export default function EnquiryForm() {
                     required
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-11 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-xl text-sm transition-all"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
+                  <Label className="text-[10px] uppercase tracking-wider font-bold text-slate-500 ml-1 block">
                     Child Name
                   </Label>
                   <Input
@@ -195,12 +195,12 @@ export default function EnquiryForm() {
                     required
                     value={formData.childName}
                     onChange={handleInputChange}
-                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-11 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-xl text-sm transition-all"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
+                  <Label className="text-[10px] uppercase tracking-wider font-bold text-slate-500 ml-1 block">
                     Phone Number
                   </Label>
                   <Input
@@ -214,12 +214,12 @@ export default function EnquiryForm() {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-11 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-xl text-sm transition-all"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">
+                  <Label className="text-[10px] uppercase tracking-wider font-bold text-slate-500 ml-1 block">
                     Email Address
                   </Label>
                   <Input
@@ -229,7 +229,7 @@ export default function EnquiryForm() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-11 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-xl text-sm transition-all"
                   />
                 </div>
               </div>
@@ -237,11 +237,11 @@ export default function EnquiryForm() {
 
             {/* STEP 2 */}
             {step === 2 && (
-              <div className="grid grid-cols-1 gap-3.5">
+              <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-1">
-                   <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">Campus</Label>
+                  <Label className="text-[10px] uppercase tracking-wider font-bold text-slate-500 ml-1 block">Campus</Label>
                   <Select required value={formData.campus} onValueChange={(v) => handleSelectChange("campus", v)}>
-                    <SelectTrigger className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 rounded-lg text-sm">
+                    <SelectTrigger className="h-11 bg-slate-50 border-slate-200 focus:bg-white focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-xl text-sm w-full text-slate-700">
                       <SelectValue placeholder="Select Campus" />
                     </SelectTrigger>
                     <SelectContent>
@@ -252,24 +252,24 @@ export default function EnquiryForm() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-[10px] uppercase tracking-[0.12em] font-bold text-slate-400 ml-1">Grade</Label>
+                  <Label className="text-[10px] uppercase tracking-wider font-bold text-slate-500 ml-1 block">Grade</Label>
                   <Input
                     id="grade"
                     placeholder="Enter grade"
                     required
                     value={formData.grade}
                     onChange={handleInputChange}
-                    className="h-10 sm:h-11 lg:h-10 bg-slate-50/50 border-slate-200 focus:border-[#facc15] focus:ring-0 rounded-lg text-sm transition-all"
+                    className="h-11 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] rounded-xl text-sm transition-all"
                   />
                 </div>
               </div>
             )}
 
-            <div className="pt-2 transition-transform active:scale-[0.99] hover:scale-[1.01]">
+            <div className="pt-2">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#facc15] hover:bg-[#eab308] text-[#1e3a8a] font-black h-11 sm:h-12 lg:h-10 text-sm sm:text-base lg:text-sm rounded-lg shadow-sm transition-all"
+                className="w-full bg-[#F59E0B] hover:bg-[#e08e0a] text-[#0A2540] font-black h-12 text-sm sm:text-base rounded-xl shadow-lg shadow-amber-500/10 hover:shadow-xl hover:-translate-y-[1px] transition-all duration-200"
               >
                 {isSubmitting
                   ? "Saving..."
@@ -280,7 +280,7 @@ export default function EnquiryForm() {
             </div>
 
             {errorMessage && (
-              <p className="text-xs font-medium text-red-600 text-center">
+              <p className="text-xs font-semibold text-red-600 text-center">
                 {errorMessage}
               </p>
             )}
@@ -291,15 +291,15 @@ export default function EnquiryForm() {
                 variant="ghost"
                 disabled={isSubmitting}
                 onClick={() => setStep(1)}
-                className="w-full h-8 text-xs text-slate-400 hover:bg-transparent hover:text-slate-600 font-bold"
+                className="w-full h-9 text-xs text-slate-400 hover:bg-transparent hover:text-[#2563EB] font-bold transition-colors"
               >
                 ← Back to Previous
               </Button>
             )}
 
-            <div className="flex items-center justify-center space-x-2 pt-2 border-t border-slate-50">
-              <ShieldCheck className="w-3 h-3 text-emerald-500" />
-              <span className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">Secure Transmission</span>
+            <div className="flex items-center justify-center space-x-2 pt-3 border-t border-slate-100">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+              <span className="text-[9px] text-slate-400 uppercase tracking-widest font-extrabold">Secure Transmission</span>
             </div>
           </form>
         )}
