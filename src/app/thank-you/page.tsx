@@ -1,12 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default function ThankYouPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#eef3f7] to-white">
+    <>
+      {/* Event snippet for Conversion Landing Page conversion on thank you page */}
+      <Script
+        id="conversion-event"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            gtag('event', 'conversion', {'send_to': 'AW-11268190714/YAwjCICWs8IYEPrji_0p'});
+          `,
+        }}
+      />
+      <main className="min-h-screen bg-gradient-to-br from-[#eef3f7] to-white">
       <Header />
 
       <section className="min-h-[calc(100svh-73px)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
@@ -53,6 +65,7 @@ export default function ThankYouPage() {
       </section>
 
       <Footer />
-    </main>
+      </main>
+    </>
   );
 }
