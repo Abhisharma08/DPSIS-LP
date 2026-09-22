@@ -61,7 +61,7 @@ export default function WhySchool() {
         >
           <div className="rounded-[24px] overflow-hidden shadow-2xl border border-white/10 group">
             <Image
-              src="https://cdn.lugc.link/90d7fd4e-1c9c-48e6-898f-ef737995c3ad/-/stretch/off/-/resize/x634/-/format/auto/"
+              src="https://res.cloudinary.com/ddqqlfsjp/image/upload/v1790075336/IMG_2_adldtm.png"
               alt="DPS International School"
               width={750}
               height={480}

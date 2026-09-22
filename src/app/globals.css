@@ -544,7 +544,8 @@
 
 .academic-image {
   width: 100%;
-  height: 225px;
+  aspect-ratio: 4 / 3;
+  height: auto;
 
   overflow: hidden;
 

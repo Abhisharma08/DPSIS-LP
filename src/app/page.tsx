@@ -7,6 +7,7 @@ import JoinSection from "@/components/JoinSection";
 import MissionVision from "@/components/MissionVision";
 import Footer from "@/components/Footer";
 import CampusFacilities from "@/components/CampusFacilities";
+import OurCampuses from "@/components/OurCampuses";
 
 export default function Home() {
   return (
@@ -16,7 +17,8 @@ export default function Home() {
       {/* <EligibilitySection /> */}
       <FeatureCards />
       <JoinSection />
-       <CampusFacilities />
+      <OurCampuses />
+      <CampusFacilities />
       <WhySchool />
       <MissionVision />
       <Footer />
