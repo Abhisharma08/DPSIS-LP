@@ -39,11 +39,6 @@ const OurCampuses = () => {
                 alt="Alexandra Campus" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute bottom-6 right-6">
-                <a href="#" className="inline-block bg-[#16c646] hover:bg-[#15b23f] text-white font-medium text-lg px-7 py-3 rounded-full shadow-lg transition-colors duration-300">
-                  Click here
-                </a>
-              </div>
             </div>
             <div className="flex items-start gap-5 px-2">
               <Building2 className="w-9 h-9 text-black shrink-0 mt-0.5" strokeWidth={1.5} />
